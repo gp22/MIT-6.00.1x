@@ -36,6 +36,19 @@ def isPrime(n):
 #                yield next
 #                primes.append(next)
 
+# def genPrimes(): # from superpawko on Slack
+#     n = 2 # START NUMBER
+#     p = [] # primes list
+#     while True: # END number for now
+#         for x in range(2,(n//2)+2):  # search for number which is not more than half of a "n"
+#             if n % x ==0:
+#                 break
+#         if x == (n//2)+1: # after checking every number and it is still working append prime number
+#             p.append(n)
+#             yield n
+#
+#         n += 1
+		
 def genPrimes():
     yield 2
     primes = [2, 3]
