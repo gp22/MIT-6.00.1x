@@ -238,21 +238,26 @@ class CiphertextMessage(Message):
         '''
         valid_words = 0
         best_cipher = 0
+        decrypted_message_best = ''
 
-        for s in range(26):
+        for s in range(26): # decrypt the message using each of the 26 ciphers
             word_count = 0
             encrypted_message = PlaintextMessage(self.message_text, s)
             decrypted_message = encrypted_message.get_message_text_encrypted().split()
 
+            # check if each word in the decrypted message is valid
+            # if it is, increase word_count by 1
             for word in decrypted_message:
                 if is_word(Message.get_valid_words(self), word):
                     word_count += 1
-            
+
+            # check if this key results in the most valid words so far
             if word_count > valid_words:
                 valid_words = word_count
                 best_cipher = s
-            print('word count =', word_count)
-        print('best cipher =', best_cipher)
+                decrypted_message_best = ' '.join(decrypted_message)
+
+        return (best_cipher, decrypted_message_best)
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
